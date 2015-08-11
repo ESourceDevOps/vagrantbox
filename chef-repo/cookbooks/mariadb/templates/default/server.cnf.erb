@@ -1,0 +1,77 @@
+#
+# These groups are read by MariaDB server.
+# Use it for options that only the server (but not clients) should see
+#
+# See the examples of server my.cnf files in /usr/share/mysql/
+#
+
+# this is read by the standalone daemon and embedded servers
+[server]
+
+# this is only for the mysqld standalone daemon
+[mysqld]
+# GENERAL #
+user = <%= node['mysql']['user']%>
+default-storage-engine = <%= node['mysql']['default-storage-engine']%>
+socket = <%= node['mysql']['socket']%>
+pid-file = <%= node['mysql']['pid-file']%>
+bind-address = <%= node['mysql']['bind-address']%>
+sql-mode = <%= node['mysql']['sql-mode']%>
+
+# MyISAM #
+key-buffer-size = <%= node['mysql']['key-buffer-size']%>
+myisam-recover = <%= node['mysql']['myisam-recover']%>
+
+# SAFETY #
+max-allowed-packet = <%= node['mysql']['max-allowed-packet']%>
+max-connect-errors = <%= node['mysql']['max-connect-errors']%>
+
+# DATA STORAGE #
+datadir = <%= node['mysql']['datadir']%>
+
+# BINARY LOGGING #
+log-bin = <%= node['mysql']['log-bin']%>
+expire-logs-days = <%= node['mysql']['expire-logs-days']%>
+sync-binlog = <%= node['mysql']['sync-binlog']%>
+binlog-format = <%= node['mysql']['binlog-format']%>
+
+# CACHES AND LIMITS #
+tmp-table-size = <%= node['mysql']['tmp-table-size']%>
+max-heap-table-size = <%= node['mysql']['max-heap-table-size']%>
+query-cache-type = <%= node['mysql']['query-cache-type']%>
+query-cache-size = <%= node['mysql']['query-cache-size']%>
+max-connections = <%= node['mysql']['max-connections']%>
+thread-cache-size = <%= node['mysql']['thread-cache-size']%>
+open-files-limit = <%= node['mysql']['open-files-limit']%>
+table-definition-cache = <%= node['mysql']['table-definition-cache']%>
+table-open-cache = <%= node['mysql']['table-open-cache']%>
+
+# INNODB #
+innodb-flush-method = <%= node['mysql']['innodb-flush-method']%>
+innodb-log-files-in-group = <%= node['mysql']['innodb-log-files-in-group']%>
+innodb-log-group-home-dir = <%= node['mysql']['innodb-log-group-home-dir']%>
+innodb-log-file-size = <%= node['mysql']['innodb-log-file-size']%>
+innodb-flush-log-at-trx-commit = <%= node['mysql']['innodb-flush-log-at-trx-commit']%>
+innodb-file-per-table = <%= node['mysql']['innodb-file-per-table']%>
+#innodb-buffer-pool-size = <%= node['mysql']['innodb-buffer-pool-size']%>
+innodb-buffer-pool-size = <%= node['mysql']['innodb-buffer-pool-size']%>
+
+# LOGGING #
+log-error = <%= node['mysql']['log-error']%>
+log-queries-not-using-indexes = <%= node['mysql']['log-queries-not-using-indexes']%>
+slow-query-log = <%= node['mysql']['slow-query-log']%>
+slow-query-log-file = <%= node['mysql']['slow-query-log-file']%>
+long-query-time = <%= node['mysql']['long-query-time']%>
+
+# this is only for embedded server
+[embedded]
+
+# This group is only read by MariaDB servers, not by MySQL.
+# If you use the same .cnf file for MySQL and MariaDB,
+# you can put MariaDB-only options here
+[mariadb]
+
+# This group is only read by MariaDB-10.0 servers.
+# If you use the same .cnf file for MariaDB of different versions,
+# use this group for options that older servers don't understand
+[mariadb-10.0]
