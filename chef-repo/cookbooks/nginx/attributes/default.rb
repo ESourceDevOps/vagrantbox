@@ -7,7 +7,7 @@
 
 default['nginx']['user'] = 'nginx'
 default['nginx']['http_redirect_listen_port'] = '80'
-default['nginx']['listen_port'] = '6082'
+default['nginx']['listen_port'] = '6085'
 default['nginx']['varnish_port'] = '6085'
 default['nginx']['listen_ssl'] = '443'
 default['nginx']['server_name'] = 'local.drupalbox.com' # <-- Do not include the http or www parts.
