@@ -32,22 +32,17 @@ begin
 		EOH
 end
 
-box_type = node['drupal_box_wrapper']['box_type']
-current_user = node['current_user']
+# Creating the devdes group.
+group 'devdes' do
+    action :create
+    not_if 'getent group devdes', :user => 'root'
+end
 
-if (box_type == 'local')
-    # Creating the devdes group.
-    group 'devdes' do
-        action :create
-        not_if 'getent group devdes', :user => 'root'
-    end
-
-    # Adding current user to the devdes group.
-    group 'devdes' do
-        members 'vagrant'
-        action :modify
-        append true
-    end
+# Adding current user to the devdes group.
+group 'devdes' do
+    members 'vagrant'
+    action :modify
+    append true
 end
 
 # Setting permissions on the base directory.
@@ -103,7 +98,6 @@ end
 file '/esource/mysql/lockfile' do
     action :create_if_missing
     notifies :run, 'bash[mysql-secure-installation]', :immediately
-    only_if { box_type == 'local' }
 end
 
 # Securing the mysql installation.
@@ -126,7 +120,6 @@ cookbook_file '/home/vagrant/.my.cnf' do
     group 'vagrant'
     mode '0664'
     not_if { File.exists?('/home/vagrant/.my.cnf') }
-    only_if { box_type == 'local' }
 end
 
 # Creating the sysctl configuration with high concurrency web server kernel tweaks.
@@ -136,4 +129,3 @@ cookbook_file '/etc/sysctl.conf' do
     group 'root'
     mode '0644'
 end
-

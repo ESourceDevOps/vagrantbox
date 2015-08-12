@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "https://googledrive.com/host/0B5KmyzksuKPHfkdiY3JjTmRUSzJBalpDU3RqSzk0RXhPb2J5T2hKUVA1WGdFbEtfbGxESTA/centos7.box"
   
   # Create a hostname for the box.
-  config.vm.hostname = "local.esource.com"
+  config.vm.hostname = "local.drupalbox.com"
   
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.220"
+  config.vm.network "private_network", ip: "192.168.33.221"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -51,15 +51,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
-  #   # Don't boot with headless mode
-  #   vb.gui = true
-  #
+    # Don't boot with headless mode
+    #vb.gui = true
     # Customize the memory on the VM:
     vb.memory = 4096;
     # Customize the number of CPUs on the VM:
     vb.cpus = 4
     # Customize the name of the VM:
-    vb.name = "Drupal - Base Box"
+    vb.name = "Drupal - Box"
   end
   #
   # View the documentation for the provider you're using for more
@@ -75,10 +74,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # some recipes and/or roles.
   #
   config.vm.provision "chef_solo" do |chef|
+    # Tell chef where our cookbooks are.
     chef.cookbooks_path = "chef-repo/cookbooks"
-    # chef.roles_path = "chef-repo/roles"
-    # chef.data_bags_path = "chef-repo/data_bags"
-    # chef.add_role "web"
     
     # Add the main recipe.
     chef.add_recipe "drupal_box_wrapper"

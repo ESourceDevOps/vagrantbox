@@ -12,7 +12,7 @@ default['varnish']['nfiles'] = 131_072
 default['varnish']['memlock'] = 82_000
 default['varnish']['instance'] = node['fqdn']
 default['varnish']['listen_address'] = nil
-default['varnish']['listen_port'] = 80
+default['varnish']['listen_port'] = 6085
 default['varnish']['vcl_conf'] = 'default.vcl'
 default['varnish']['vcl_source'] = 'default.vcl.erb'
 default['varnish']['vcl_cookbook'] = 'varnish'
@@ -37,3 +37,5 @@ default['varnish']['use_default_repo'] = true
 
 default['varnish']['backend_host'] = 'localhost'
 default['varnish']['backend_port'] = '6082'
+
+default['varnish']['conf_centos7_param'] = 'varnish.params'

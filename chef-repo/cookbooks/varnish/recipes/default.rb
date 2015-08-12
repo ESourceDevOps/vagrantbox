@@ -22,7 +22,7 @@ include_recipe 'varnish::repo' if node['varnish']['use_default_repo']
 
 package 'varnish'
 
-template node['varnish']['default'] do
+template "#{node['varnish']['dir']}/#{node['varnish']['conf_centos7_param']}" do
   source node['varnish']['conf_source']
   cookbook node['varnish']['conf_cookbook']
   owner 'root'
